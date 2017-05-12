@@ -7,10 +7,14 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/request_counter', methods=['GET', 'POST'])
+@app.route('/request_counter', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def request_counter():
     counter[request.method] += 1
-    print(counter)
+    content = ''
+    for item in counter:
+        content += item + ': ' + str(counter[item]) + '\n'
+    with open('request_counts.txt', 'w') as file:
+        file.write(content)
     return redirect('/')
 
 
@@ -20,5 +24,10 @@ def statistics():
 
 
 if __name__ == '__main__':
-    counter = {'GET': 0, 'POST': 0, 'DELETE': 0, 'PUT': 0}
+    with open('request_counts.txt', 'r') as file:
+        lines = file.readlines()
+        counter = {}
+        for item in lines:
+            row = item.replace('\n', '').split(': ')
+            counter[row[0]] = int(row[1])
     app.run(debug=True)
