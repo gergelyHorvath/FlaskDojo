@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Statistics</title>
+</head>
+<body>
+    <table border="1">
+        <tr>
+            <th>Method</th>
+            <th>Count</th>
+        </tr>
+        {% for row in counter %}
+            <tr>
+                <td>{{row}}</td>
+                <td>{{counter[row]}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <form action='/'><input type="submit" value="Back"></form>
+
+</body>
+</html>
